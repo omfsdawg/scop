@@ -118,6 +118,20 @@
             backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(26, 25, 24, 0.05);
         }
+
+        /* Imgur Embed Customization */
+        .imgur-embed-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .imgur-embed-container iframe {
+            min-height: 100%;
+            min-width: 100%;
+        }
     </style>
 </head>
 <body class="font-sans text-scop-dark overflow-x-hidden">
@@ -215,12 +229,12 @@
         </div>
 
         <!-- Right Image -->
-        <div class="w-full md:w-7/12 h-[60vh] md:h-screen relative overflow-hidden bg-scop-surface">
-            <!-- Loading Imgur link directly -->
-            <img src="<blockquote class="imgur-embed-pub" lang="en" data-id="a/AZ5zly4" data-context="false" ><a href="//imgur.com/a/AZ5zly4"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>" alt="scōp stethoscope lineup in various premium colors" class="w-full h-full object-cover object-center img-reveal">
-            
-            <!-- Subtle gradient overlay for text readability if needed, though the image is clean -->
-            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 md:opacity-100 mix-blend-multiply"></div>
+        <div class="w-full md:w-7/12 h-[60vh] md:h-screen relative overflow-hidden bg-scop-surface pt-12 md:pt-0">
+            <div class="imgur-embed-container img-reveal">
+                <!-- Imgur Embed Script -->
+                <blockquote class="imgur-embed-pub" lang="en" data-id="a/AZ5zly4" data-context="false" ><a href="//imgur.com/a/AZ5zly4"></a></blockquote>
+                <script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+            </div>
         </div>
     </main>
 
