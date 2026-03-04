@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>scōp | The Modern Stethoscope</title>
+    
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (CDN for standalone file) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Cormorant', 'serif'],
+                        sans: ['DM Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        scop: {
+                            bg: '#F5F3F0',
+                            surface: '#EBE7E0',
+                            dark: '#1A1918',
+                            muted: '#686662',
+                            gold: '#B5955C',
+                            green: '#274033',
+                            blush: '#DFA88E',
+                            navy: '#223645'
+                        }
+                    },
+                    spacing: {
+                        '18': '4.5rem',
+                        '22': '5.5rem',
+                        '30': '7.5rem',
+                    },
+                    animation: {
+                        'fade-up': 'fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'fade-in': 'fadeIn 1s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeUp: {
+                            '0%': { opacity: 0, transform: 'translateY(24px)' },
+                            '100%': { opacity: 1, transform: 'translateY(0)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: 0 },
+                            '100%': { opacity: 1 },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #F5F3F0;
+            color: #1A1918;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Tactile interactive elements */
+        .btn-primary {
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px -8px rgba(26, 25, 24, 0.3);
+            background-color: #302E2D;
+        }
+        .btn-primary:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .btn-outline {
+            transition: all 0.3s ease;
+        }
+        .btn-outline:hover {
+            border-color: #1A1918;
+            background-color: #1A1918;
+            color: #F5F3F0;
+        }
+
+        /* Editorial Image Reveal */
+        .img-reveal {
+            clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+            animation: revealDown 1.2s cubic-bezier(0.77, 0, 0.175, 1) 0.2s forwards;
+        }
+
+        @keyframes revealDown {
+            100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+        }
+
+        /* Staggered text animations */
+        .stagger-1 { opacity: 0; animation-delay: 0.1s; }
+        .stagger-2 { opacity: 0; animation-delay: 0.3s; }
+        .stagger-3 { opacity: 0; animation-delay: 0.5s; }
+        .stagger-4 { opacity: 0; animation-delay: 0.7s; }
+
+        /* Custom selection color */
+        ::selection {
+            background-color: #B5955C;
+            color: #fff;
+        }
+
+        /* Navbar scroll effect */
+        .nav-scrolled {
+            background-color: rgba(245, 243, 240, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(26, 25, 24, 0.05);
+        }
+    </style>
+</head>
+<body class="font-sans text-scop-dark overflow-x-hidden">
+
+    <!-- Navigation -->
+    <header id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 py-4 px-6 md:px-12 flex justify-between items-center">
+        <!-- Logo -->
+        <a href="#" class="text-4xl font-display tracking-tight hover:opacity-70 transition-opacity">
+            scōp
+        </a>
+
+        <!-- Desktop Links -->
+        <nav class="hidden md:flex space-x-10 text-sm font-medium tracking-wide">
+            <a href="#shop" class="hover:text-scop-gold transition-colors relative group">
+                Shop
+                <span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-scop-gold transition-all group-hover:w-full"></span>
+            </a>
+            <a href="#technology" class="hover:text-scop-gold transition-colors relative group">
+                Technology
+                <span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-scop-gold transition-all group-hover:w-full"></span>
+            </a>
+            <a href="#about" class="hover:text-scop-gold transition-colors relative group">
+                About Us
+                <span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-scop-gold transition-all group-hover:w-full"></span>
+            </a>
+        </nav>
+
+        <!-- Icons -->
+        <div class="flex items-center space-x-5">
+            <button aria-label="Search" class="hover:text-scop-gold transition-colors">
+                <i data-lucide="search" class="w-5 h-5"></i>
+            </button>
+            <button aria-label="Account" class="hidden sm:block hover:text-scop-gold transition-colors">
+                <i data-lucide="user" class="w-5 h-5"></i>
+            </button>
+            <button aria-label="Cart" class="hover:text-scop-gold transition-colors relative">
+                <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                <span class="absolute -top-1 -right-1 bg-scop-gold text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center">2</span>
+            </button>
+            <button class="md:hidden ml-4">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section (Editorial Split) -->
+    <main class="min-h-screen pt-24 md:pt-0 flex flex-col md:flex-row">
+        
+        <!-- Left Content -->
+        <div class="w-full md:w-5/12 flex flex-col justify-center px-6 md:px-16 lg:px-24 py-12 md:py-0 z-10">
+            <div class="max-w-md">
+                <div class="flex items-center space-x-3 mb-6 animate-fade-up stagger-1">
+                    <span class="w-8 h-[1px] bg-scop-gold"></span>
+                    <span class="text-xs font-bold tracking-[0.2em] text-scop-gold uppercase">The Modern Stethoscope</span>
+                </div>
+                
+                <h1 class="text-5xl md:text-6xl lg:text-7xl font-display leading-[1.05] mb-6 animate-fade-up stagger-2">
+                    Acoustic brilliance.<br>
+                    <span class="italic text-scop-muted">Unparalleled design.</span>
+                </h1>
+                
+                <p class="text-base md:text-lg text-scop-muted mb-10 leading-relaxed font-light animate-fade-up stagger-3">
+                    Engineered for the modern clinician. We stripped away the antiquated, heavy designs of the past to create an instrument that sounds as flawless as it looks.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 animate-fade-up stagger-4">
+                    <a href="#shop" class="btn-primary bg-scop-dark text-scop-bg px-8 py-4 flex items-center justify-center space-x-2 text-sm font-medium tracking-wide">
+                        <span>Shop the Collection</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                    <a href="#technology" class="btn-outline border border-scop-muted/30 px-8 py-4 flex items-center justify-center text-sm font-medium tracking-wide">
+                        Explore Technology
+                    </a>
+                </div>
+                
+                <!-- Trust indicators -->
+                <div class="mt-16 pt-8 border-t border-scop-dark/10 flex items-center space-x-6 animate-fade-up stagger-4">
+                    <div class="flex -space-x-2">
+                        <img src="https://i.pravatar.cc/100?img=32" alt="Clinician" class="w-10 h-10 rounded-full border-2 border-scop-bg">
+                        <img src="https://i.pravatar.cc/100?img=47" alt="Clinician" class="w-10 h-10 rounded-full border-2 border-scop-bg">
+                        <img src="https://i.pravatar.cc/100?img=12" alt="Clinician" class="w-10 h-10 rounded-full border-2 border-scop-bg">
+                    </div>
+                    <div>
+                        <div class="flex text-scop-gold mb-1">
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                        </div>
+                        <p class="text-xs font-medium text-scop-muted">Loved by 10,000+ clinicians</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Image -->
+        <div class="w-full md:w-7/12 h-[60vh] md:h-screen relative overflow-hidden bg-scop-surface">
+            <!-- Loading Imgur link directly -->
+            <img src="https://i.imgur.com/AZ5zly4.jpg" alt="scōp stethoscope lineup in various premium colors" class="w-full h-full object-cover object-center img-reveal">
+            
+            <!-- Subtle gradient overlay for text readability if needed, though the image is clean -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 md:opacity-100 mix-blend-multiply"></div>
+        </div>
+    </main>
+
+    <!-- Value Proposition / Features Grid -->
+    <section id="technology" class="py-24 md:py-32 px-6 md:px-12 lg:px-24 bg-scop-dark text-scop-bg">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-24">
+                <h2 class="text-4xl md:text-5xl font-display leading-tight max-w-xl">
+                    Reimagined from the earpieces down.
+                </h2>
+                <p class="text-scop-bg/70 max-w-sm mt-6 md:mt-0 font-light text-sm md:text-base leading-relaxed">
+                    Every curve, material, and acoustic channel has been obsessively engineered to provide superior diagnostic confidence.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 lg:gap-16">
+                <!-- Feature 1 -->
+                <div class="group">
+                    <div class="w-12 h-12 rounded-full border border-scop-gold/30 flex items-center justify-center mb-6 text-scop-gold group-hover:bg-scop-gold group-hover:text-scop-dark transition-colors duration-300">
+                        <i data-lucide="waves" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="text-xl font-medium mb-3">Acoustic Clarity</h3>
+                    <p class="text-scop-bg/60 font-light text-sm leading-relaxed">
+                        Dual-lumen tubing and a high-density titanium chestpiece capture low and high frequencies with zero interference.
+                    </p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="group">
+                    <div class="w-12 h-12 rounded-full border border-scop-gold/30 flex items-center justify-center mb-6 text-scop-gold group-hover:bg-scop-gold group-hover:text-scop-dark transition-colors duration-300">
+                        <i data-lucide="feather" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="text-xl font-medium mb-3">Featherweight Comfort</h3>
+                    <p class="text-scop-bg/60 font-light text-sm leading-relaxed">
+                        Weighing just 145g. Ergonomic silicone eartips and an angled headset eliminate neck fatigue during 12-hour shifts.
+                    </p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="group">
+                    <div class="w-12 h-12 rounded-full border border-scop-gold/30 flex items-center justify-center mb-6 text-scop-gold group-hover:bg-scop-gold group-hover:text-scop-dark transition-colors duration-300">
+                        <i data-lucide="palette" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="text-xl font-medium mb-3">Premium Colorways</h3>
+                    <p class="text-scop-bg/60 font-light text-sm leading-relaxed">
+                        Finished in stain-resistant, medical-grade silicone. Colors designed to complement your favorite scrubs seamlessly.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Color Selector (Shop Section) -->
+    <section id="shop" class="py-24 md:py-32 px-6 md:px-12 bg-scop-bg overflow-hidden relative">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
+            
+            <!-- Left: Product Details & Interaction -->
+            <div class="w-full lg:w-1/2 order-2 lg:order-1">
+                <span class="text-xs font-bold tracking-[0.2em] text-scop-gold uppercase mb-4 block">The Core Collection</span>
+                <h2 class="text-4xl md:text-5xl font-display mb-6">Match your aesthetic.</h2>
+                <p class="text-scop-muted font-light mb-10 max-w-md">
+                    Select a colorway that speaks to you. Featuring 24k gold or aerospace-grade titanium hardware.
+                </p>
+
+                <!-- Color Swatches -->
+                <div class="mb-10">
+                    <p class="text-sm font-medium mb-4 flex justify-between max-w-[280px]">
+                        <span>Color: <span id="color-name" class="text-scop-muted ml-1">Forest Green</span></span>
+                    </p>
+                    <div class="flex space-x-4">
+                        <button onclick="changeColor('Forest Green', '#274033', '#B5955C')" class="color-btn w-10 h-10 rounded-full bg-[#274033] ring-2 ring-offset-2 ring-scop-dark ring-offset-scop-bg transition-all" aria-label="Forest Green"></button>
+                        <button onclick="changeColor('Midnight Navy', '#223645', '#B5955C')" class="color-btn w-10 h-10 rounded-full bg-[#223645] ring-2 ring-offset-2 ring-transparent hover:ring-scop-muted/30 ring-offset-scop-bg transition-all" aria-label="Midnight Navy"></button>
+                        <button onclick="changeColor('Charcoal Black', '#2A2A2A', '#1A1918')" class="color-btn w-10 h-10 rounded-full bg-[#2A2A2A] ring-2 ring-offset-2 ring-transparent hover:ring-scop-muted/30 ring-offset-scop-bg transition-all" aria-label="Charcoal Black"></button>
+                        <button onclick="changeColor('Dusty Blush', '#DFA88E', '#B5955C')" class="color-btn w-10 h-10 rounded-full bg-[#DFA88E] ring-2 ring-offset-2 ring-transparent hover:ring-scop-muted/30 ring-offset-scop-bg transition-all" aria-label="Dusty Blush"></button>
+                    </div>
+                </div>
+
+                <div class="flex items-end space-x-6 mb-10">
+                    <div>
+                        <span class="block text-sm text-scop-muted mb-1">Price</span>
+                        <span class="text-2xl font-medium">$245.00</span>
+                    </div>
+                </div>
+
+                <button class="btn-primary w-full max-w-md bg-scop-dark text-scop-bg py-4 flex items-center justify-center space-x-2 text-sm font-medium tracking-wide">
+                    <span>Add to Bag</span>
+                    <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                </button>
+                
+                <p class="text-xs text-scop-muted mt-4 max-w-md text-center">Free shipping & 30-day clinical trial.</p>
+            </div>
+
+            <!-- Right: Dynamic Product Image Representation -->
+            <!-- Note: Since we only have the group photo, we will simulate a focused product view with a styled box -->
+            <div class="w-full lg:w-1/2 order-1 lg:order-2 flex justify-center">
+                <div class="relative w-full max-w-[400px] aspect-[3/4] bg-white rounded-2xl shadow-2xl p-8 flex flex-col items-center justify-center overflow-hidden group">
+                    <!-- Dynamic simulated stethoscope representation -->
+                    <div id="product-display-tube" class="w-4 h-64 rounded-t-full rounded-b-none bg-[#274033] transition-colors duration-500 relative z-10 shadow-inner">
+                        <div id="product-display-chestpiece" class="absolute -bottom-16 -left-8 w-20 h-20 rounded-full border-8 border-[#B5955C] bg-[#274033] transition-colors duration-500 shadow-xl flex items-center justify-center">
+                            <span class="text-[#B5955C] font-display italic text-xs">scōp</span>
+                        </div>
+                    </div>
+                    
+                    <div class="absolute inset-0 bg-gradient-to-tr from-black/5 to-transparent pointer-events-none"></div>
+                    
+                    <!-- Floating abstract decor -->
+                    <div class="absolute top-10 right-10 text-scop-muted/20 font-display text-8xl italic select-none pointer-events-none group-hover:scale-110 transition-transform duration-700">s</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Editorial Quote Section -->
+    <section class="py-24 md:py-32 px-6 md:px-12 bg-scop-surface text-center">
+        <div class="max-w-4xl mx-auto">
+            <i data-lucide="quote" class="w-10 h-10 mx-auto text-scop-gold mb-8 opacity-50"></i>
+            <h2 class="text-3xl md:text-5xl font-display leading-tight mb-8">
+                "Finally, a stethoscope that understands design doesn't have to compromise diagnostics. It perfectly matches my aesthetic while picking up faint murmurs I used to miss."
+            </h2>
+            <div class="flex items-center justify-center space-x-4">
+                <img src="https://i.pravatar.cc/150?img=49" alt="Dr. Sarah Jenkins" class="w-12 h-12 rounded-full border-2 border-scop-bg">
+                <div class="text-left">
+                    <p class="font-medium text-sm">Dr. Sarah Jenkins</p>
+                    <p class="text-xs text-scop-muted">Cardiologist, New York</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-scop-dark text-scop-bg py-16 px-6 md:px-12 lg:px-24">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 border-b border-scop-bg/10 pb-12">
+            
+            <div class="col-span-1 md:col-span-1">
+                <a href="#" class="text-3xl font-display tracking-tight mb-6 inline-block">scōp</a>
+                <p class="text-scop-bg/60 text-sm font-light leading-relaxed mb-6">
+                    The modern stethoscope.<br>Designed for those who heal with precision and style.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-scop-bg/60 hover:text-scop-gold transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                    <a href="#" class="text-scop-bg/60 hover:text-scop-gold transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                    <a href="#" class="text-scop-bg/60 hover:text-scop-gold transition-colors"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="font-medium mb-6 uppercase text-xs tracking-widest text-scop-bg/50">Shop</h4>
+                <ul class="space-y-4 text-sm font-light text-scop-bg/80">
+                    <li><a href="#" class="hover:text-scop-gold transition-colors">The Core Collection</a></li>
+                    <li><a href="#" class="hover:text-scop-gold transition-colors">Limited Editions</a></li>
+                    <li><a href="#" class="hover:text-scop-gold transition-colors">Engraving Services</a></li>
+                    <li><a href="#" class="hover:text-scop-gold transition-colors">Replacement Parts</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-medium mb-6 uppercase text-xs tracking-widest text-scop-bg/50">Support</h4>
+                <ul class="space-y-4 text-sm font-light text-scop-bg/80">
+                    <li><a href="#" class="hover:text-scop-gold transition-colors">Help Center</a></li>
+                    <li><a href="#" class="hover:text-scop-gold transition-colors">Warranty</a></li>
+                    <li><a href="#" class="hover:text-scop-gold transition-colors">Returns & Exchanges</a></li>
+                    <li><a href="#" class="hover:text-scop-gold transition-colors">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-medium mb-6 uppercase text-xs tracking-widest text-scop-bg/50">Stay in the loop</h4>
+                <p class="text-sm font-light text-scop-bg/80 mb-4">Exclusive color drops and clinical insights.</p>
+                <form class="flex" onsubmit="event.preventDefault();">
+                    <input type="email" placeholder="Email address" class="bg-transparent border-b border-scop-bg/30 py-2 outline-none text-sm w-full focus:border-scop-gold transition-colors">
+                    <button type="submit" class="border-b border-scop-bg/30 hover:border-scop-gold text-scop-gold py-2 px-2 transition-colors">
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center pt-8 text-xs font-light text-scop-bg/40">
+            <p>&copy; 2026 scōp Medical. All rights reserved.</p>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="#" class="hover:text-scop-bg transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-scop-bg transition-colors">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Initialize Icons & Simple Interactions -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('nav-scrolled');
+            } else {
+                nav.classList.remove('nav-scrolled');
+            }
+        });
+
+        // Color Selection Logic
+        function changeColor(name, hexCode, hardwareHex) {
+            // Update Text
+            document.getElementById('color-name').innerText = name;
+            
+            // Update Active Ring
+            const buttons = document.querySelectorAll('.color-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('ring-scop-dark');
+                btn.classList.add('ring-transparent');
+            });
+            event.target.classList.remove('ring-transparent');
+            event.target.classList.add('ring-scop-dark');
+
+            // Update abstract product display
+            document.getElementById('product-display-tube').style.backgroundColor = hexCode;
+            document.getElementById('product-display-chestpiece').style.backgroundColor = hexCode;
+            document.getElementById('product-display-chestpiece').style.borderColor = hardwareHex;
+            document.getElementById('product-display-chestpiece').querySelector('span').style.color = hardwareHex;
+        }
+    </script>
+</body>
+</html>
